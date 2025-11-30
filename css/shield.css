@@ -1,0 +1,563 @@
+/* ---------------------------------- */
+/* BASE STYLES */
+/* ---------------------------------- */
+.extension-container {
+    position: relative;
+}
+
+/* FIX: GHI ĐÈ THUỘC TÍNH SCROLL CỦA TAB CHUNG */
+#shield-content {
+    /* Quan trọng: Ngăn cuộn cho Tab này */
+    overflow-y: hidden !important; 
+}
+
+/* --- DỊCH CHUYỂN BLOCK STATUS LÊN TRÊN --- */
+#block-status-wrapper {
+    /* FIX QUAN TRỌNG: Đặt width 100% để buộc khối chiếm trọn không gian */
+    width: 100%; 
+    /* Dịch chuyển lên 20px */
+    transform: translateY(-20px); 
+    transition: transform 0.3s ease-in-out;
+    /* Cần tạo ngữ cảnh 3D để nó không bị "đè" khiên (Nếu cần) */
+    position: relative; 
+    z-index: 5;
+}
+
+/* ---------------------------------- */
+/* THÊM CHỮ "MeoU Shield" */
+/* ---------------------------------- */
+#shield-container::before {
+    content: "MeoU Shield"; /* Nội dung chữ */
+    position: absolute;
+    top: -2rem; /* Đẩy lên trên khiên khoảng 32px */
+    left: 50%;
+    transform: translateX(-50%); /* Căn giữa */
+    
+    /* Style chữ */
+    font-family: 'Inter', sans-serif;
+    font-weight: 700; /* In đậm */
+    font-size: 1.25rem; /* Kích thước text-xl */
+    color: #111827; /* Màu xám đen (text-gray-900) */
+    white-space: nowrap;
+    z-index: 20;
+}
+
+/* ---------------------------------- */
+/* CHART & BASELINE STYLES (MỚI) */
+/* ---------------------------------- */
+.chart-wrapper {
+    position: relative;
+    padding-bottom: 20px; /* Tạo không gian cho nhãn ngày */
+}
+
+#statsChart {
+    /* Quan trọng: Vẫn đặt canvas absolute để nó chiếm hết vùng vẽ */
+    position: absolute; 
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.chart-base {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 1; /* Nằm dưới canvas */
+}
+
+/* Đường kẻ ngang (Baseline) */
+.chart-base::after {
+    content: '';
+    position: absolute;
+    bottom: 18px; /* Đặt ở vị trí nhãn ngày Chart.js cũ */
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2); /* Đường kẻ mờ */
+}
+
+.chart-labels {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    /* 7 cột bằng nhau */
+    grid-template-columns: repeat(7, 1fr); 
+    text-align: center;
+}
+
+.chart-labels .label {
+    font-size: 10px;
+    color: #6b7280;
+    font-weight: 600;
+    padding: 0 2px;
+    position: relative; 
+    z-index: 10; /* Đảm bảo chữ nổi lên trên đường kẻ */
+}
+
+/* 2. Vẽ đường kẻ dọc (Grid lines) từ giữa mỗi chữ vươn lên */
+.chart-labels .label::before {
+    content: '';
+    position: absolute;
+    
+    /* CĂN GIỮA ĐƯỜNG KẺ VÀO TÂM CỦA CHỮ */
+    left: 50%; 
+    transform: translateX(-50%);
+    
+    /* ĐỊNH VỊ CHIỀU CAO VÀ HƯỚNG VẼ */
+    bottom: 18px;     /* Bắt đầu từ phía trên chữ một chút */
+    height: 140px;    /* Vươn lên cao (khớp với chiều cao chart container) */
+    
+    /* STYLE ĐƯỜNG KẺ */
+    width: 1px;       /* Độ mảnh */
+    background-color: rgba(0, 0, 0, 0.05); /* Màu rất mờ để không rối mắt */
+    z-index: -1;      /* Nằm dưới cùng để không đè lên biểu đồ */
+    pointer-events: none;
+}
+
+/* Căn chỉnh đường kẻ ngang bị đè */
+.chart-base::after {
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 3; /* Đẩy lên trên các đường kẻ dọc để nó không bị mờ */
+}
+
+/* ---------------------------------- */
+/* COSMIC TOGGLE STYLES (SCALED 50%) */
+/* ---------------------------------- */
+.cosmic-toggle {
+  position: relative;
+  width: 70px; /* 140px / 2 */
+  height: 35px; /* 70px / 2 */
+  transform-style: preserve-3d;
+  perspective: 500px;
+}
+
+/* FIX: Cô lập .toggle và .slider bằng tiền tố .cosmic-toggle */
+.cosmic-toggle .toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cosmic-toggle .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #1a1a2e, #16213e);
+  border-radius: 17.5px; /* 35px / 2 */
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  box-shadow:
+    0 0 10px rgba(0, 0, 0, 0.5), /* Giảm 20px -> 10px */
+    inset 0 0 7.5px rgba(255, 255, 255, 0.05); /* Giảm 15px -> 7.5px */
+  overflow: hidden;
+}
+
+.cosmos {
+  position: absolute;
+  inset: 0;
+  /* Giữ nguyên background-size và opacity */
+  background: radial-gradient(0.5px 0.5px at 10% 10%, #fff 100%, transparent),
+    radial-gradient(0.5px 0.5px at 20% 20%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 30% 30%, #fff 100%, transparent),
+    radial-gradient(0.5px 0.5px at 40% 40%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 50% 50%, #fff 100%, transparent),
+    radial-gradient(0.5px 0.5px at 60% 60%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 70% 70%, #fff 100%, transparent),
+    radial-gradient(0.5px 0.5px at 80% 80%, #fff 100%, transparent),
+    radial-gradient(0.5px 0.5px at 90% 90%, #fff 100%, transparent);
+  background-size: 200% 200%;
+  opacity: 0.1;
+  transition: 0.5s;
+}
+
+.toggle-orb {
+  position: absolute;
+  height: 31px; /* 62px / 2 */
+  width: 31px; /* 62px / 2 */
+  left: 2px; /* 4px / 2 */
+  bottom: 2px; /* 4px / 2 */
+  background: linear-gradient(145deg, #ff6b6b, #4ecdc4);
+  border-radius: 50%;
+  transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-style: preserve-3d;
+  z-index: 2;
+}
+
+.inner-orb {
+  position: absolute;
+  inset: 2.5px; /* 5px / 2 */
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff, #e6e6e6);
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.inner-orb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(0, 0, 0, 0.1) 10deg,
+    transparent 20deg
+  );
+  animation: patternRotate 10s linear infinite;
+}
+
+.ring {
+  position: absolute;
+  inset: -1.5px; /* -3px / 2 */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Giảm độ dày */
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+/* FIX: Cập nhật selector để chỉ ảnh hưởng đến Cosmic Toggle */
+.cosmic-toggle .toggle:checked + .slider {
+  background: linear-gradient(45deg, #16213e, #1a1a2e);
+}
+
+.cosmic-toggle .toggle:checked + .slider .toggle-orb {
+  transform: translateX(35px) rotate(360deg); /* 70px / 2 */
+  background: linear-gradient(145deg, #4ecdc4, #45b7af);
+}
+
+.cosmic-toggle .toggle:checked + .slider .inner-orb {
+  background: linear-gradient(145deg, #45b7af, #3da89f);
+  transform: scale(0.9);
+}
+
+.cosmic-toggle .toggle:checked + .slider .ring {
+  border-color: rgba(78, 205, 196, 0.3);
+  animation: ringPulse 2s infinite;
+}
+
+.energy-line {
+  position: absolute;
+  width: 100%;
+  height: 1px; /* 2px / 2 */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(78, 205, 196, 0.5),
+    transparent
+  );
+  transform-origin: left;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.energy-line:nth-child(1) {
+  top: 20%;
+  transform: rotate(15deg);
+}
+.energy-line:nth-child(2) {
+  top: 50%;
+  transform: rotate(0deg);
+}
+.energy-line:nth-child(3) {
+  top: 80%;
+  transform: rotate(-15deg);
+}
+
+/* FIX: Cập nhật selector */
+.cosmic-toggle .toggle:checked + .slider .energy-line {
+  opacity: 1;
+  animation: energyFlow 2s linear infinite;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.particle {
+  position: absolute;
+  width: 2px; /* 4px / 2 */
+  height: 2px; /* 4px / 2 */
+  background: #4ecdc4;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* FIX: Cập nhật selector */
+.cosmic-toggle .toggle:checked + .slider .particle {
+  animation: particleBurst 1s ease-out infinite;
+}
+
+.particle:nth-child(1) {
+  left: 20%;
+  animation-delay: 0s;
+}
+.particle:nth-child(2) {
+  left: 40%;
+  animation-delay: 0.2s;
+}
+.particle:nth-child(3) {
+  left: 60%;
+  animation-delay: 0.4s;
+}
+.particle:nth-child(4) {
+  left: 80%;
+  animation-delay: 0.6s;
+}
+.particle:nth-child(5) {
+  left: 30%;
+  animation-delay: 0.8s;
+}
+.particle:nth-child(6) {
+  left: 70%;
+  animation-delay: 1s;
+}
+
+/* Анимации */
+@keyframes ringPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes patternRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes energyFlow {
+  0% {
+    transform: scaleX(0) translateX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleX(1) translateX(50%);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0) translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(
+        calc(cos(var(--angle)) * 25px), /* 50px / 2 */
+        calc(sin(var(--angle)) * 25px) /* 50px / 2 */
+      )
+      scale(0);
+    opacity: 0;
+  }
+}
+
+/* Hover эффекты */
+.cosmic-toggle .slider:hover .toggle-orb {
+  filter: brightness(1.2);
+  box-shadow:
+    0 0 10px rgba(78, 205, 196, 0.5), /* Giảm 20px -> 10px */
+    0 0 20px rgba(78, 205, 196, 0.3); /* Giảm 40px -> 20px */
+}
+
+.cosmic-toggle .slider:hover .cosmos {
+  opacity: 0.2;
+  animation: cosmosPan 20s linear infinite;
+}
+
+@keyframes cosmosPan {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+/* Активное состояние */
+.cosmic-toggle .toggle:active + .slider .toggle-orb {
+  transform: scale(0.95);
+}
+
+/* 3D эффект при наведении */
+.cosmic-toggle:hover .slider {
+  transform: rotateX(10deg) rotateY(10deg);
+}
+
+.cosmic-toggle:hover .toggle-orb {
+  transform: translateZ(5px); /* 10px / 2 */
+}
+
+/* Тень */
+.cosmic-toggle .toggle:checked + .slider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    rgba(78, 205, 196, 0.2),
+    transparent 50%
+  );
+  opacity: 0;
+  animation: glowFollow 2s linear infinite;
+}
+
+@keyframes glowFollow {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+
+/* GỠ BỎ STYLE CŨ (Để tránh xung đột) */
+.shield-toggle-btn {
+    display: none !important;
+}
+
+
+/* ---------------------------------- */
+/* CHART STYLE */
+/* ---------------------------------- */
+canvas {
+    filter: drop-shadow(0px 10px 10px rgba(74, 222, 128, 0.1));
+}
+
+/* ---------------------------------- */
+/* SHIELD ANIMATION & EFFECT */
+/* ---------------------------------- */
+.shield-icon {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    filter: drop-shadow(2px 6px 4px rgba(0, 0, 0, 0.25));
+    transition: filter 0.3s ease-in-out;
+}
+
+@keyframes pulse-ring {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.6; }
+    100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; } 
+}
+
+.pulse-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    z-index: 0;
+    animation: pulse-ring 2s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.pulse-green { background-color: rgba(74, 222, 128, 0.4); }
+.pulse-red { background-color: rgba(239, 68, 68, 0.4); }
+
+/* ---------------------------------- */
+/* TAILWIND POLYFILL (Để chạy được không cần CDN) */
+/* ---------------------------------- */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-grow { flex-grow: 1; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.75rem; }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.w-32 { width: 8rem; }
+.h-32 { height: 8rem; }
+.w-24 { width: 6rem; }
+.h-24 { height: 6rem; }
+.w-16 { width: 4rem; }
+.h-8 { height: 2rem; }
+.w-8 { width: 2rem; }
+.h-4 { height: 1rem; }
+.w-4 { width: 1rem; }
+.h-40 { height: 10rem; }
+.w-2\/3 { width: 66.666667%; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.h-1 { height: 0.25rem; }
+.p-6 { padding: 1.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.text-center { text-align: center; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.font-medium { font-weight: 500; }
+.font-bold { font-weight: 700; }
+.tracking-wide { letter-spacing: 0.025em; }
+.text-gray-900 { color: #111827; }
+.text-gray-700 { color: #374151; }
+.text-gray-600 { color: #4b5563; }
+.text-gray-500 { color: #6b7280; }
+.text-gray-200 { color: #e5e7eb; }
+.bg-gray-200 { background-color: #e5e7eb; }
+.bg-white { background-color: white; }
+.text-\[\#ef4444\] { color: #ef4444; }
+.text-\[\#4ade80\] { color: #4ade80; }
+.border-\[\#e5e7eb\] { border-color: #e5e7eb; }
+.bg-\[\#e5e7eb\] { background-color: #e5e7eb; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.top-0 { top: 0; }
+.left-0 { left: 0; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.inline-block { display: inline-block; }
+.block { display: block; }
+.align-middle { vertical-align: middle; }
+.select-none { user-select: none; }
+.overflow-hidden { overflow: hidden; }
+.rounded-full { border-radius: 9999px; }
+.border-2 { border-width: 2px; }
+.appearance-none { appearance: none; }
+.cursor-pointer { cursor: pointer; }
+.pointer-events-none { pointer-events: none; }
+.transition { transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform; }
+.transition-all { transition-property: all; }
+.transition-transform { transition-property: transform; }
+.transition-colors { transition-property: background-color, border-color, color, fill, stroke; }
+.transition-opacity { transition-property: opacity; }
+.duration-200 { transition-duration: 200ms; }
+.duration-300 { transition-duration: 300ms; }
+.duration-700 { transition-duration: 700ms; }
+.ease-in { transition-timing-function: cubic-bezier(0.4, 0, 1, 1); }
+.ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+.translate-x-0 { transform: translateX(0); }
+.translate-x-full { transform: translateX(100%); }
+.checked\:translate-x-full:checked { transform: translateX(100%); }

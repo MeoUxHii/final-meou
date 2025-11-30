@@ -1,0 +1,139 @@
+:root {
+    --text-color: #333; 
+    --primary-color: #0056b3;
+    --active-bg: rgba(255,255,255,0.3);
+    --chat-user-bg: #007bff;
+    --chat-bot-bg: #f1f0f0;
+    --gradient-2: linear-gradient(90deg, #2AF598 0%, #009EFD 100%);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --glass-blur: blur(8px);
+}
+
+html { width: 350px; height: 600px; }
+body {
+    width: 350px; 
+    height: 600px; 
+    padding: 0; margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #6DD5FA, #FFDA63);
+    color: var(--text-color); 
+    transition: background 0.3s ease, color 0.3s ease;
+    overflow: hidden; 
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+/* Scrollbar ẩn */
+body::-webkit-scrollbar, 
+.tab-content::-webkit-scrollbar,
+textarea::-webkit-scrollbar { 
+    width: 0px; display: none;
+}
+
+/* --- TAB HEADER --- */
+.tab-buttons { 
+    display: flex; 
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 2000; 
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    height: 55px; 
+    align-items: stretch;
+    flex-shrink: 0;
+}
+.tab-btn {
+    flex: 1; padding: 6px 4px; background: none; border: none; 
+    color: var(--text-color); cursor: pointer;
+    border-bottom: 3px solid transparent; opacity: 0.6; transition: all 0.2s;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; 
+}
+.tab-btn span { font-size: 11px; font-weight: 600; line-height: 1; }
+.tab-btn svg { width: 18px; height: 18px; fill: currentColor; transition: transform 0.2s ease; margin-bottom: 1px; }
+.tab-btn:hover { opacity: 0.9; background: rgba(255,255,255,0.1); }
+.tab-btn:hover svg { transform: scale(1.1); }
+.tab-btn.active { opacity: 1; color: var(--primary-color); border-bottom-color: var(--primary-color); background: var(--active-bg); }
+body.dark-mode .tab-btn.active { color: #6DD5FA; border-bottom-color: #6DD5FA; }
+
+/* --- TAB CONTENT CONTAINER --- */
+.tab-content { 
+    padding: 15px; 
+    display: none; 
+    height: 545px; 
+    box-sizing: border-box;
+}
+.tab-content.active {
+    display: block; 
+    overflow-y: auto; 
+}
+
+/* --- COMMON UI ELEMENTS --- */
+.input-group { margin-bottom: 15px; position: relative; } 
+label { display: block; margin-bottom: 6px; color: var(--text-color); font-size: 12px; font-weight: 600; opacity: 0.9; }
+
+input[type="password"], textarea, input[type="number"], input[type="text"] {
+    width: 100%; padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 8px; font-size: 12px; color: #333;
+    font-family: inherit; box-sizing: border-box; background: rgba(255, 255, 255, 0.9);
+}
+
+/* Custom Select */
+select { display: none !important; }
+.custom-select-container {
+    position: relative; width: 100%; font-size: 12px; color: #333; z-index: 100;
+}
+.custom-select-trigger {
+    position: relative; display: flex; align-items: center; justify-content: space-between;
+    padding: 10px; font-weight: 500; background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 8px; cursor: pointer;
+    transition: all 0.2s; min-height: 38px; box-sizing: border-box;
+}
+.custom-select-trigger:after {
+    content: ''; width: 6px; height: 6px; border-right: 2px solid #666; border-bottom: 2px solid #666;
+    transform: rotate(45deg); margin-left: 8px; transition: transform 0.2s; margin-top: -3px;
+}
+.custom-select-container.open .custom-select-trigger:after { transform: rotate(-135deg); margin-top: 3px; }
+.custom-options {
+    position: absolute; display: block; top: 100%; left: 0; right: 0;
+    background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 12px;
+    box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; opacity: 0; visibility: hidden; pointer-events: none;
+    transform: translateY(-15px); padding: 5px; max-height: 250px; overflow-y: auto; margin-top: 5px;
+}
+.custom-select-container.open .custom-options {
+    opacity: 1; visibility: visible; pointer-events: all;
+    animation: liquidFastPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.custom-option {
+    padding: 8px 10px; font-size: 12px; color: #333; cursor: pointer; border-radius: 8px; transition: all 0.1s;
+    display: flex; align-items: center; margin-bottom: 2px;
+}
+.custom-option:hover { background-color: rgba(0, 86, 179, 0.1); color: #0056b3; padding-left: 14px; }
+.custom-option.selected { background-color: rgba(0, 86, 179, 0.2); font-weight: 700; color: #0056b3; }
+.custom-option.is-header {
+    font-weight: 800; background-color: rgba(0,0,0,0.05); color: #555; cursor: default;
+    justify-content: center; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px;
+}
+
+button {
+    width: auto; padding: 8px 14px; background: #ffffff;
+    color: #0056b3; border: 1px solid #ccc; border-radius: 8px;
+    font-size: 12px; cursor: pointer; font-weight: 600; transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+button:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+
+/* General Classes */
+.status { margin-top: 10px; padding: 8px; border-radius: 4px; font-size: 12px; display: none; text-align: center; font-weight: bold; }
+.status.success { background: #d4edda; color: #155724; display: block; }
+.status.error { background: #f8d7da; color: #721c24; display: block; }
+
+@keyframes liquidFastPop {
+    0% { opacity: 0; transform: translateY(-15px) scale(0.9) skewY(3deg); border-radius: 30px; }
+    60% { transform: translateY(2px) scale(1.01) skewY(-1deg); }
+    100% { opacity: 1; transform: translateY(0) scale(1) skewY(0); border-radius: 12px; }
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 0.8; transform: translateY(0); } }

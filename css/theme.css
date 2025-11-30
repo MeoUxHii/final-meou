@@ -1,0 +1,25 @@
+.preview-bar { height: 40px; width: 100%; border-radius: 8px; margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.5); }
+
+.preset-label { font-size: 12px; font-weight: 600; color: var(--text-color); margin: 10px 0 5px 0; opacity: 0.8; }
+#preset-list { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin-bottom: 15px; }
+.preset-item { height: 25px; border-radius: 8px; cursor: pointer; border: 2px solid rgba(255,255,255,0.3); transition: transform 0.2s; }
+.preset-item:hover { transform: scale(1.1); border-color: #fff; z-index: 1; }
+
+#color-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.color-item { display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.5); padding: 3px; border-radius: 20px; position: relative; }
+.color-input-wrapper { width: 24px; height: 24px; border-radius: 50%; overflow: hidden; border: 2px solid #fff; }
+input[type="color"] { width: 150%; height: 150%; border: none; padding: 0; margin: -25%; cursor: pointer; }
+.remove-color-btn { width: 14px; height: 14px; background: none; border: none; color: #ff4444; cursor: pointer; padding: 0; }
+.remove-color-btn:hover { transform: scale(1.2) rotate(90deg); color: #ff0000; }
+
+#add-color-btn { background: #27ae60; color: white; border: none; padding: 5px 10px; border-radius: 20px; font-size: 12px; }
+
+button#saveThemeBtn { width: 100%; padding: 12px; font-size: 14px; margin-top: 15px; background: #0056b3; color: white; border: none; }
+button#saveThemeBtn:hover { background: #004a99; }
+
+.control-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
+.value-display { font-weight: bold; color: #0056b3; font-size: 13px; }
+
+input.theme-range { -webkit-appearance: none; appearance: none; width: 100%; background: transparent; margin: 0; }
+input.theme-range::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: rgba(0,0,0,0.2); border-radius: 10px; }
+input.theme-range::-webkit-slider-thumb { height: 16px; width: 16px; border-radius: 50%; background: #fff; cursor: pointer; -webkit-appearance: none; margin-top: -5px; box-shadow: 0 1px 3px rgba(0,0,0,0.4); }

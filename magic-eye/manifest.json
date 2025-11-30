@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Meou Magic Eye",
+  "version": "2.0",
+  "description": "Bấm Ctrl+Space để triệu hồi Ngọc Mai!",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "offscreen",
+    "sidePanel",
+    "notifications",
+    "declarativeNetRequest" 
+  ],
+   "host_permissions": [
+    "https://lens.google.com/*",
+    "https://www.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Meou Magic Eye"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "commands": {
+    "activate_magic_eye": {
+      "suggested_key": {
+        "default": "Ctrl+Space",
+        "mac": "MacCtrl+Space"
+      },
+      "description": "Kích hoạt Meou Magic Eye"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["offscreen.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

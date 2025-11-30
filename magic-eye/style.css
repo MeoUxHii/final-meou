@@ -1,0 +1,43 @@
+/* style.css - Chứa hiệu ứng của Meou Magic Eye */
+
+@keyframes mai-pop-up {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.02); filter: brightness(1.1); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+
+@keyframes mai-gradient-flash {
+    0% { opacity: 0; }
+    30% { opacity: 0.6; }
+    100% { opacity: 0; }
+}
+
+#mai-freeze-img {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 2147483646 !important;
+    object-fit: contain;
+    animation: mai-pop-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+#mai-gradient-layer {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 2147483647 !important; pointer-events: none;
+    background: linear-gradient(135deg, rgba(255, 105, 180, 0.2), rgba(255, 255, 255, 0.4));
+    animation: mai-gradient-flash 1s ease-out forwards;
+}
+
+.mai-toast-message {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    padding: 12px 24px; background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: white; border-radius: 30px; font-size: 16px; font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 2147483647 !important;
+    animation: fadeInOut 3s forwards; font-family: sans-serif;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -20px); }
+    10% { opacity: 1; transform: translate(-50%, 0); }
+    80% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -20px); }
+}

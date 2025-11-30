@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Meou Magic Result</title>
+    <style>
+      /* Khai báo biến theme mặc định (sẽ bị ghi đè bởi JS) */
+      :root {
+        --bg-color: #f1f3f4;
+        --text-color: #333;
+        --accent-color: #ff69b4; /* Màu hồng mặc định */
+        --card-bg: #ffffff;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg-color); /* Dùng biến */
+        color: var(--text-color);    /* Dùng biến */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify_content: center;
+        height: 100vh;
+        text-align: center;
+        transition: background 0.3s, color 0.3s; /* Hiệu ứng chuyển màu mượt */
+      }
+
+      .loader {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid var(--accent-color); /* Dùng biến */
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 10px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      h3 { 
+        font-size: 16px; 
+        margin: 0; 
+        font-weight: 600;
+      }
+
+      p { 
+        font-size: 12px; 
+        margin-top: 5px; 
+        opacity: 0.8; 
+      }
+
+      /* Style cho iframe container */
+      #lens-container {
+        width: 100vw; 
+        height: 100vh; 
+        overflow: hidden; 
+        position: relative; 
+        background: var(--bg-color); /* Đồng bộ nền */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="status-container">
+      <div class="loader" id="loader" style="display:none"></div>
+      <h3 id="status">Meou Magic Eye<br>Sẵn sàng!</h3>
+      <p id="subtext">Ấn Ctrl + Space và chọn vùng để tìm kiếm</p>
+    </div>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

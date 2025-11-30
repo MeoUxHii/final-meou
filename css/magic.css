@@ -1,0 +1,207 @@
+/* --- MAGIC LAYOUT --- */
+#magic-content.active {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.magic-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.magic-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-shrink: 0;
+}
+
+.magic-label {
+    margin: 0;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-color);
+}
+
+/* --- TOGGLE SWITCH --- */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .toggle-slider {
+    background-color: #27ae60;
+}
+
+input:focus + .toggle-slider {
+    box-shadow: 0 0 1px #27ae60;
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+.toggle-slider.round {
+    border-radius: 34px;
+}
+
+.toggle-slider.round:before {
+    border-radius: 50%;
+}
+
+/* --- SEARCH BOX --- */
+.magic-search-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 8px 12px;
+    border-radius: 20px;
+    gap: 8px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+}
+
+.magic-search-wrapper input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    font-size: 13px;
+    outline: none;
+    padding: 0;
+    color: var(--text-color);
+}
+
+/* FIX: Đây là đoạn bị thiếu khiến icon to đùng */
+.magic-search-wrapper svg {
+    width: 16px; 
+    height: 16px; 
+    stroke: var(--text-color); 
+    opacity: 0.6;
+}
+
+/* --- MAGIC LIST --- */
+.magic-list-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.magic-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1; /* Để list giãn hết khoảng trống */
+    overflow-y: auto;
+    padding-bottom: 5px;
+    max-height: unset;
+}
+
+#magicListPopup::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    display: none;
+}
+
+.magic-card {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.magic-card:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.01);
+}
+
+.magic-card-shortcut {
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+}
+
+.magic-card-preview {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.empty-magic-state {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-color);
+    opacity: 0.6;
+    padding: 20px 0;
+    font-style: italic;
+}
+
+/* --- FOOTER BUTTON --- */
+.magic-manage-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.magic-manage-btn:hover {
+    background: #004a99;
+}
