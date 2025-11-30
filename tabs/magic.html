@@ -1,0 +1,26 @@
+<!-- Wrapper để quản lý layout Flex -->
+<div class="magic-wrapper">
+    <div class="magic-header-row">
+        <label class="magic-label">Kích hoạt Text Expander:</label>
+        <label class="toggle-switch">
+            <input type="checkbox" id="magicToggle">
+            <span class="toggle-slider round"></span>
+        </label>
+    </div>
+
+    <div class="magic-search-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="magicSearchPopup" placeholder="Tìm kiếm shortcut...">
+    </div>
+
+    <div class="magic-list-label">Danh sách Shortcut <span class="magic-count-wrapper">(<span id="magicCountPopup">0</span>)</span></div>
+    <div id="magicListPopup" class="magic-list">
+        <!-- Item template mẫu -->
+        <div class="empty-magic-state">
+            Chưa có shortcut nào.<br>
+            Bấm "Quản lý" để thêm mới nhé!
+        </div>
+    </div>
+
+    <button id="openOptionsBtn" class="magic-manage-btn">Quản lý ⚙️</button>
+</div>

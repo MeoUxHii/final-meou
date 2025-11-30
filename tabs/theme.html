@@ -1,0 +1,28 @@
+<div class="input-group">
+    <div class="preview-bar" id="themePreviewBar"></div>
+</div>
+<div class="input-group">
+    <div class="preset-label">Mẫu có sẵn (Sáng / Tối):</div>
+    <div id="preset-list"></div>
+</div>
+<div class="input-group">
+    <label>Tuỳ chỉnh màu (Trộn):</label>
+    <div id="color-list"></div>
+    <button id="add-color-btn" type="button">+ Thêm màu</button>
+</div>
+<div class="input-group">
+    <div class="control-row">
+        <label>Hướng Gradient:</label>
+        <span class="value-display"><span id="angleVal">135</span>°</span>
+    </div>
+    <input type="range" id="gradientAngle" class="theme-range" min="0" max="360" value="135">
+</div>
+<div class="input-group">
+    <div class="control-row">
+        <label>Cường độ màu (Opacity):</label>
+        <span class="value-display"><span id="opacityVal">100</span>%</span>
+    </div>
+    <input type="range" id="bgOpacity" class="theme-range" min="10" max="100" value="100">
+</div>
+<button id="saveThemeBtn">Lưu Theme</button>
+<div id="theme-status" class="status"></div>

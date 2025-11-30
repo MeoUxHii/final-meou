@@ -1,0 +1,54 @@
+/* --- UTILITIES & ANIMATIONS --- */
+
+.hidden { display: none !important; }
+
+/* Empty States */
+.empty-state, .empty-icon { 
+    grid-column: 1 / -1; 
+    text-align: center; 
+    padding: 80px; 
+    color: var(--text-sub); 
+    background: var(--bg-card); 
+    border-radius: 24px; 
+    border: 1px dashed var(--border); 
+    backdrop-filter: blur(4px); 
+}
+.empty-image-small {
+    width: 100px; height: 100px; object-fit: contain;
+    display: block; margin: 0 auto 10px auto; border-radius: 8px;
+}
+
+/* Stats */
+.stats-row { margin-bottom: 24px; display: flex; align-items: center; }
+.stats-row h2 { font-size: 24px; font-weight: 800; color: var(--text-main); text-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.badge { background: rgba(255,255,255,0.3); color: var(--text-main); padding: 4px 12px; border-radius: 20px; font-size: 14px; margin-left: 10px; font-weight: 700; border: 1px solid var(--border); backdrop-filter: blur(4px); }
+
+/* Toast */
+.toast { 
+    position: fixed; bottom: 32px; right: 32px; 
+    background: #10b981; color: white; padding: 14px 28px; 
+    border-radius: 50px; font-weight: 700; 
+    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4); 
+    transform: translateY(100px) scale(0.9); opacity: 0; 
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    z-index: 200; 
+}
+.toast.show { transform: translateY(0) scale(1); opacity: 1; }
+
+/* Animations */
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+@keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.shake-animation { animation: shake 0.4s ease-in-out; }
+.spin-anim { animation: spin 1s linear infinite; }
+
+/* Tailwind Utilities (Minimal Polyfill) */
+.h-16 { height: 9rem; } .w-16 { width: 9%; }
+.h-24 { height: 9rem; } .w-24 { width: 9rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mb-4 { margin-bottom: 1rem; }
+.mt-12 { margin-top: 3rem; } .mt-16 { margin-top: 4rem; }
+.text-center { text-align: center; }
+.text-gray-500 { color: #6b7280; }
+.text-lg-small { font-size: 1rem; } .text-sm-small { font-size: 0.8rem; }
+.font-semibold { font-weight: 600; }

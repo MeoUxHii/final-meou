@@ -1,0 +1,116 @@
+<div class="p-6 text-gray-900 h-full flex flex-col">
+    
+    <!-- Main Status Area -->
+    <div class="flex flex-col items-center justify-center space-y-3 mb-1 mt-2 w-full"> 
+        <!-- SHIELD ICON CONTAINER (w-32 h-32) -->
+        <div id="shield-container" class="relative flex items-center justify-center w-32 h-32 my-2 mx-auto"> <!-- THÊM mx-auto -->
+            
+            <!-- Vòng tròn tỏa sáng (Pulse Ring) -->
+            <div id="shield-pulse" class="pulse-effect pulse-green w-24 h-24"></div>
+
+            <!-- SINGLE SHIELD ICON (Dùng SVG mới, fill color được điều khiển bằng Gradient) -->
+            <div id="shield-icon" class="shield-icon">
+                <svg id="single-shield-svg" xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24">
+                    <!-- Định nghĩa Gradient MỚI cho trạng thái BẬT (Xanh) và TẮT (Đỏ) -->
+                    <defs>
+                        <linearGradient id="shield-gradient-on" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <!-- Màu xanh sáng/neon ở trên cùng --><stop offset="0%" style="stop-color:#86efac;stop-opacity:1" /> 
+                            <!-- Màu xanh lá rực rỡ ở giữa --><stop offset="50%" style="stop-color:#4ade80;stop-opacity:1" /> 
+                            <!-- Màu xanh rêu đậm/teal ở dưới cùng --><stop offset="100%" style="stop-color:#0f766e;stop-opacity:1" /> 
+                        </linearGradient>
+                        <linearGradient id="shield-gradient-off" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <!-- Màu đỏ hồng/sáng ở trên cùng (Shine effect) --><stop offset="0%" style="stop-color:#fca5a5;stop-opacity:1" /> 
+                            <!-- Màu đỏ rực ở giữa --><stop offset="50%" style="stop-color:#ef4444;stop-opacity:1" /> 
+                            <!-- Màu đỏ đô/burgundy đậm ở dưới cùng --><stop offset="100%" style="stop-color:#991b1b;stop-opacity:1" /> 
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Path ĐỎ (Tắt) - Luôn nằm dưới, không có transition -->
+                    <path fill="url(#shield-gradient-off)" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                    
+                    <!-- Path XANH (Bật) - Nằm trên, có transition opacity -->
+                    <path id="shield-path-on" 
+                          class="transition-opacity duration-700 ease-in-out" 
+                          fill="url(#shield-gradient-on)" 
+                          d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5l-9-4z"
+                          style="opacity: 1;"/> <!-- Mặc định là ON -->
+                </svg>
+            </div>
+        </div>
+        
+        <!-- KHỐI CHỮ ĐƯỢC DỊCH CHUYỂN -->
+        <div id="block-status-wrapper" class="text-center w-full"> <!-- THÊM w-full -->
+            <span class="text-xl font-bold text-gray-900 relative">Đã chặn: </span>
+            <span class="text-xl font-bold text-[#ef4444]" id="block-count-display">0</span>
+            <style>
+                /* Điều chỉnh style chữ cho nền trắng */
+                #block-count-display {
+                    /* Giữ hiệu ứng text-shadow và gradient để nó nổi bật */
+                    background: linear-gradient(to right, #000000, #374151); 
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    text-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+        </div>
+    </div> <!-- Kết thúc Main Status Area -->
+
+    <!-- NÚT BẬT/TẮT MỚI: COSMIC TOGGLE -->
+    <!-- Khối này sẽ tự căn giữa do khối cha đã là w-full -->
+    <div class="flex justify-center mt-5 w-full mx-auto"> 
+        <label class="cosmic-toggle" id="shield-toggle-label">
+            <input class="toggle" type="checkbox" id="toggle-shield-input" checked />
+            <div class="slider">
+                <div class="cosmos"></div>
+                <div class="energy-line"></div>
+                <div class="energy-line"></div>
+                <div class="energy-line"></div>
+                <div class="toggle-orb">
+                    <div class="inner-orb"></div>
+                    <div class="ring"></div>
+                </div>
+                <div class="particles">
+                    <div style="--angle: 30deg" class="particle"></div>
+                    <div style="--angle: 60deg" class="particle"></div>
+                    <div style="--angle: 90deg" class="particle"></div>
+                    <div style="--angle: 120deg" class="particle"></div>
+                    <div style="--angle: 150deg" class="particle"></div>
+                    <div style="--angle: 180deg" class="particle"></div>
+                </div>
+            </div>
+        </label>
+    </div>
+
+    <!-- VỊ TRÍ MỚI CHO TÊN WEBSITE (Đã thêm ID current-website) -->
+    <div id="current-website" class="text-gray-600 text-sm font-medium text-center mb-1 w-full mx-auto"> 
+        Đang tải...
+    </div>
+
+    <!-- Statistics Header -->
+    <div class="text-center mb-1 mt-1 w-full mx-auto"> <!-- THÊM w-full -->
+        <h3 class="text-gray-700 text-sm font-medium">Số liệu thống kê</h3>
+    </div>
+
+    <!-- Chart Container -->
+    <div class="flex-grow w-full relative h-40 chart-wrapper"> <!-- THÊM chart-wrapper -->
+        <canvas id="statsChart"></canvas>
+        
+        <!-- KHỐI MỚI: Chứa nhãn và đường phân chia CSS -->
+        <div id="chart-base" class="chart-base">
+            <!-- Nhãn ngày (Tự động tạo bằng JS hoặc CSS/HTML nếu cần) -->
+            <div class="chart-labels">
+                <span class="label">Mon</span>
+                <span class="label">Tue</span>
+                <span class="label">Wed</span>
+                <span class="label">Thu</span>
+                <span class="label">Fri</span>
+                <span class="label">Sat</span>
+                <span class="label">Sun</span>
+            </div>
+            <!-- Đường kẻ dọc sẽ được vẽ bằng CSS Grid/Flexbox Gaps -->
+        </div>
+    </div>
+    
+    <!-- Bottom line -->
+    <div class="w-2/3 mx-auto h-1 bg-gray-200 rounded-full mt-4 mb-2"></div>
+</div>

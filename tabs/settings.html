@@ -1,0 +1,68 @@
+<div class="settings-row">
+    <div class="input-group">
+        <label for="translationService">Model Dịch:</label>
+        <select id="translationService">
+            <option value="gemini">Gemini</option>
+            <option value="gcp">Google Cloud</option>
+        </select>
+    </div>
+    <div class="input-group">
+        <label for="targetLang">Ngôn Ngữ:</label>
+        <select id="targetLang">
+            <option value="vi-VN">Tiếng Việt (vi-VN)</option>
+            <option value="en-US">English (en-US)</option>
+            <option value="zh-CN">Tiếng Trung (zh-CN)</option>
+            <option value="ja-JP">Tiếng Nhật (ja-JP)</option>
+            <option value="ko-KR">Tiếng Hàn (ko-KR)</option>
+        </select>
+    </div>
+</div>
+
+<div class="input-group">
+    <label for="translationTone">Tông giọng (Only Gemini - Dịch):</label>
+    <select id="translationTone">
+        <option value="default">Dân Chuyên</option>
+        <option value="vietnamese_native">Bố mày người Việt</option>
+    </select>
+</div>
+
+<div class="input-group">
+    <label for="voiceSelector">Giọng Nói:</label>
+    <div class="voice-controls">
+        <div style="flex: 1; position: relative;">
+            <select id="voiceSelector"><option value="" disabled selected>Đang tải...</option></select>
+        </div>
+        <button id="demoVoiceBtn" title="Nghe thử">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <button id="toggleFavoriteBtn" title="Ghim">🖤</button>
+    </div>
+</div>
+
+<div class="input-group">
+    <label>Âm lượng:</label>
+    <div class="volume-wrapper">
+        <label class="slider">
+            <input type="range" class="level" id="volumeLevel" min="0" max="100" step="1" value="100">
+            <svg class="volume" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+        </label>
+    </div>
+</div>
+
+<div class="input-group">
+    <label for="speakingRate">Tốc độ đọc:</label>
+    <div class="volume-wrapper">
+        <label class="slider">
+            <input type="range" class="level" id="speakingRate" min="0.25" max="2.0" step="0.05" value="1.0">
+            <div class="setting-btn">
+                <span class="bar bar1"></span>
+                <span class="bar bar2"></span>
+                <span class="bar bar1"></span>
+            </div>
+        </label>
+    </div>
+</div>
+<button id="saveBtn">Lưu cài đặt</button>
+<div id="status" class="status"></div>

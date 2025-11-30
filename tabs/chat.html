@@ -1,0 +1,54 @@
+<div id="chat-history">
+</div>
+
+<div class="chat-input-wrapper">
+    <div id="attachmentPreviewContainer" style="display: none; padding: 5px; border-bottom: 1px dashed rgba(0,0,0,0.1);">
+        <div id="attachmentContent" class="preview-wrapper">
+        </div>
+    </div>
+
+    <!-- [MỚI] Khu vực hiển thị Reply Preview -->
+    <div id="replyPreviewContainer">
+        <div class="reply-content">
+            <span class="reply-label">Trả lời:</span>
+            <span id="replyTextContent">...</span>
+        </div>
+        <button class="reply-close-btn" id="closeReplyBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+
+    <div class="chat-input-top">
+        <textarea id="chatInput" class="searchInput" rows="1" placeholder="Hỏi MeoU gì đó..."></textarea>
+    </div>
+    <div class="chat-actions-bar">
+        <div class="actions-left">
+            <button id="attachBtn" class="icon-btn" title="Đính kèm">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </button>
+            <button id="chatResetBtn" class="icon-btn" title="Cuộc trò chuyện mới">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+            </button>
+        </div>
+        <div class="actions-right">
+            <div class="custom-tone-wrapper">
+                <button id="toneTriggerBtn" class="tone-trigger-btn">
+                    <span id="currentToneLabel">Dân chuyên</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+                </button>
+                <div id="toneMenu" class="tone-menu">
+                    <!-- Các option này sẽ bị JS ghi đè, nhưng để đây cho đúng structure -->
+                    <div class="tone-option" data-value="dan_chuyen">Dân chuyên</div>
+                    <div class="tone-option" data-value="lao_vo_cung">Láo vô cùng</div>
+                    <div class="tone-option" data-value="be_cung">Bé cưng</div>
+                    <div class="tone-option" data-value="mot_con_meo">Một con mèo</div>
+                    <!-- Dòng này quan trọng nè anh -->
+                    <div class="tone-option" data-value="be_dam_dang" style="color: #ff6b6b;">Bé đảm đang 🔒</div>
+                </div>
+            </div>
+            <button id="chatSendBtn" class="icon-btn" title="Gửi">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </div>
+    </div>
+</div>
