@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeoU Magic Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CẬP NHẬT ĐƯỜNG DẪN CSS MỚI -->
+    <link rel="stylesheet" href="option/css/main.css">
+    
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo-area">
+                <img src="icon128.png" alt="MeoU Logo" class="logo-img">
+                <span class="logo-text">MeoU Settings</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" id="navShortcuts" class="nav-item active">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                    Shortcuts
+                </a>
+                <a href="#" id="navAgents" class="nav-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Custom AI Agent
+                </a>
+                <a href="#" id="navApi" class="nav-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6,6s2.69,6,6,6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65z"/><path d="M7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                    Cấu hình API
+                </a>
+                <!-- NÚT GAME MỚI THÊM VÀO ĐÂY NÈ ANH -->
+                <a href="#" id="navGame" class="nav-item" style="color: #ef4444;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
+                    Game Center
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Phiên bản 2.4.0</p>
+                <p>Made with ❤️ by MeoU</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- HEADER SHORTCUTS -->
+            <header id="headerShortcuts" class="top-bar">
+                <div class="search-wrapper">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm shortcut...">
+                </div>
+                <button id="createBtn" class="btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                    Thêm Mới
+                </button>
+            </header>
+
+            <!-- HEADER AGENTS -->
+            <header id="headerAgents" class="top-bar hidden">
+                <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Danh sách AI Agent</h2>
+                <button id="createAgentBtn" class="btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+                    Tạo Agent Mới
+                </button>
+            </header>
+
+            <!-- HEADER API -->
+            <header id="headerApi" class="top-bar hidden">
+                <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Kết nối AI (Gemini & Google Cloud)</h2>
+            </header>
+
+            <div class="content-area">
+                <!-- VIEW: SHORTCUTS -->
+                <div id="viewShortcuts">
+                    <div class="stats-row">
+                        <h2>Danh sách Shortcuts <span class="badge" id="templateCount">0</span></h2>
+                    </div>
+                    <div id="templateList" class="grid-container"></div>
+                </div>
+
+                <!-- VIEW: AGENTS -->
+                <div id="viewAgents" class="hidden">
+                    <div class="stats-row">
+                        <h2>AI Của Bạn <span class="badge" id="agentCount">0</span></h2>
+                    </div>
+                    <div id="agentList" class="grid-container">
+                        <!-- Agent cards will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- VIEW: API CONFIG -->
+                <div id="viewApi" class="hidden">
+                    <div class="api-container">
+                        <div class="form-group">
+                            <label for="apiKeys">Gemini API Keys (Mỗi dòng 1 key)</label>
+                            <textarea id="apiKeys" rows="5" placeholder="Dán key Gemini vào đây..."></textarea>
+                            <p class="hint">Lấy key miễn phí tại: <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="gcpTtsApiKey">Google Cloud API Key</label>
+                            <div class="input-with-prefix">
+                                <span class="prefix">🔑</span>
+                                <input type="password" id="gcpTtsApiKey" placeholder="Dán key Google Cloud vào đây...">
+                            </div>
+                        </div>
+                        <div class="form-footer">
+                            <button id="saveApiBtn" class="btn-primary">Lưu Cấu Hình</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Tạo/Sửa Shortcut -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modalTitle">Tạo Magic Shortcut</h3>
+                <button id="closeModalBtn" class="icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Phím tắt (Shortcut)</label>
+                    <div class="input-with-prefix">
+                        <span class="prefix">/</span>
+                        <input type="text" id="shortcutInput" placeholder="vd: mail, k, thank">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung thay thế</label>
+                    <textarea id="contentInput" rows="6" placeholder="Nhập nội dung..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelBtn" class="btn-secondary">Huỷ</button>
+                <button id="saveTemplateBtn" class="btn-primary">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tạo/Sửa Custom Agent (ĐÃ CẬP NHẬT NÚT REWRITE) -->
+    <div id="agentModalOverlay" class="modal-overlay">
+        <div class="modal-container modal-large">
+            <div class="modal-header">
+                <h3 id="agentModalTitle">Thiết kế AI Agent</h3>
+                <button id="closeAgentModalBtn" class="icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+            </div>
+            <div class="modal-body scrollable-body">
+                
+                <!-- KHU VỰC CHỌN AVATAR -->
+                <div class="avatar-upload-section">
+                    <div class="avatar-preview-container">
+                        <img id="agentAvatarPreview" src="icon128.png" alt="Agent Avatar">
+                        <button id="btnUploadAvatar" class="btn-upload-overlay" title="Tải ảnh lên">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        </button>
+                        <input type="file" id="agentAvatarFile" accept="image/png, image/jpeg, image/webp, image/gif" style="display: none;">
+                    </div>
+                    <div class="avatar-url-input">
+                        <label>Hoặc nhập link ảnh (URL)</label>
+                        <input type="text" id="agentAvatarUrl" placeholder="https://example.com/avatar.png">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Tên Agent <span style="color:#ef4444;">*</span></label>
+                        <input type="text" id="agentNameInput" placeholder="vd: Cô giáo Thảo, Sếp khó tính...">
+                        <div id="agentNameError" class="form-error-msg">Vui lòng nhập tên cho Agent nè!</div>
+                    </div>
+                    <div class="form-group half">
+                        <label>Giới tính / Vai trò</label>
+                        <select id="agentGenderInput">
+                            <option value="female">Nữ</option>
+                            <option value="male">Nam</option>
+                            <option value="bot">Robot/Khác</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Agent xưng là... <span style="color:#ef4444;">*</span></label>
+                        <input type="text" id="agentPronounInput" placeholder="vd: em, bé, vợ, tớ">
+                        <div id="agentPronounError" class="form-error-msg">Chưa nhập cách Agent xưng hô kìa!</div>
+                    </div>
+                    <div class="form-group half">
+                        <label>Agent gọi bạn là... <span style="color:#ef4444;">*</span></label>
+                        <input type="text" id="userPronounInput" placeholder="vd: anh, anh yêu, chồng, cậu">
+                        <div id="userPronounError" class="form-error-msg">Chưa nhập cách Agent gọi bạn kìa!</div>
+                    </div>
+                </div>
+                <p class="hint" style="margin-top: -10px; margin-bottom: 15px;">Mẹo: Nhập nhiều từ (cách nhau dấu phẩy) để Agent đổi cách gọi tự nhiên. Ví dụ: "em,vợ" tương ứng với "anh,chồng".</p>
+
+                <div class="form-group">
+                    <label>Tính cách & Mô tả ngắn</label>
+                    <input type="text" id="agentPersonalityInput" placeholder="vd: Dịu dàng, đanh đá, hay dỗi, chuyên nghiệp...">
+                </div>
+
+                <div class="form-group">
+                    <label>Hội thoại ví dụ (Few-shot Learning)</label>
+                    <textarea id="agentDialogueInput" rows="4" placeholder="User: Chào em
+                        Agent: Chào anh yêu, nay anh đi làm về có mệt không? ❤️
+                        User: Mệt lắm
+                        Agent: Thương quá à, để em đấm lưng cho nha 😘"></textarea>
+                    <p class="hint">Giúp AI hiểu cách nói chuyện. Mỗi dòng một câu thoại.</p>
+                </div>
+
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <label style="margin-bottom: 0;">Custom Prompt (System Instruction) - <span style="color:var(--primary);">Quan trọng nhất</span> <span style="color:#ef4444;">*</span></label>
+                        <button id="rewritePromptBtn" class="btn-ai-rewrite" title="Để MeoU viết lại cho chuẩn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284"/><path d="M3 21h18"/></svg>
+                            <span>Để MeoU viết lại</span>
+                        </button>
+                    </div>
+                    <textarea id="agentPromptInput" rows="6" placeholder="Nhập hướng dẫn chi tiết cho AI...
+VD: Bạn là một cô gái Yandere, yêu người dùng điên cuồng nhưng cực kỳ ghen tuông..."></textarea>
+                    <div id="agentPromptError" class="form-error-msg">Đừng quên nhập "linh hồn" (Prompt) cho Agent nhé!</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelAgentBtn" class="btn-secondary">Huỷ</button>
+                <button id="saveAgentBtn" class="btn-primary">Lưu Agent</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Quản lý Tag -->
+    <div id="tagModalOverlay" class="modal-overlay">
+        <div class="modal-container" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3>Gắn Thẻ (Tags)</h3>
+                <button id="closeTagModalBtn" class="icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="input-with-prefix">
+                        <span class="prefix">#</span>
+                        <input type="text" id="newTagInput" placeholder="Nhập tag mới rồi Enter...">
+                        <button id="addTagBtn" class="icon-btn" style="margin-right: 4px; color: var(--primary);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="tag-selection-area">
+                    <label style="font-size: 13px; margin-bottom: 8px; display: block; color: var(--text-sub);">Chọn từ danh sách có sẵn:</label>
+                    <div id="availableTagsList" class="tags-cloud"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveTagsBtn" class="btn-primary" style="width: 100%;">Xong</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Xác nhận Xóa -->
+    <div id="deleteModalOverlay" class="modal-overlay">
+        <div class="delete-modal-container">
+            <div class="delete-modal-header">
+                <h3>Xóa mục này?</h3>
+            </div>
+            <div class="delete-modal-content">
+                <p>Hành động này không thể hoàn tác. Bạn có chắc chắn muốn tiếp tục không?</p>
+            </div>
+            <div class="delete-modal-actions">
+                <button id="cancelDeleteBtn" class="btn-cancel-delete">Hủy bỏ</button>
+                <button id="confirmDeleteBtn" class="btn-confirm-delete">Xóa ngay</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Đã lưu thành công!</div>
+
+    <script src="utils.js"></script>
+    <script type="module" src="options.js"></script>
+</body>
+</html>
